@@ -1,0 +1,99 @@
+
+.builder-container{
+  width: 900px;
+  margin-right:auto;
+  margin-left: auto; 
+}
+.selected-el-tool{
+  border: 0.5px solid #e6e6e6;
+  padding: 7px;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: none;
+  position: absolute;
+  background: #fff
+}
+
+.sq-link{
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  vertical-align: middle;
+  color: #8a8a8a;
+  text-decoration: none;
+  display: inline-block;
+  padding: 10px;
+}
+
+.sq-link:hover{
+  color: #505050;
+  text-decoration: none;
+}
+
+.selected-parent-tool{
+  border: 0.5px solid #e6e6e6;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  position: absolute;
+  background: white;
+  display: none;
+}
+.selected-parent-tool a{
+  display: block;
+  padding: 10;
+  
+}
+
+.highlight-active{
+  outline: solid 1px rgb(59, 181, 238);
+  outline-offset: 10px
+}
+
+.row-section *:hover {
+  background: rgba(0, 0, 0, 0.02)!important;
+}
+
+.margin-lr-10{
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.append-box{
+  background: #f1f1f1;
+  height: 50px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+section{
+  margin-top:50;
+  margin-bottom:50;
+  text-align: justify
+}
+.padding{
+  padding: 5px 1!important;
+}
+
+.ul-iconnav li a{
+  padding: 50px;
+}
+
+.border-no-shadow{
+  border: 0.5px solid #e6e6e6;
+  box-shadow: 0 0 0 rgba(0,0,0,0) !important;
+}
+
+.block-img{
+  padding: 10px;
+  border: 0.5px solid #e6e6e6;
+  background: #FFF;
+  margin-bottom: 5px;
+}
+.v100{
+  height: 100%;
+}
+
+.fa{
+  padding-top:3px;
+  margin-right:5px;
+  margin-left:5px;
+}
