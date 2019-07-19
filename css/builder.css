@@ -1,17 +1,24 @@
-
 .builder-container{
   width: 900px;
   margin-right:auto;
   margin-left: auto; 
 }
+
 .selected-el-tool{
-  border: 0.5px solid #e6e6e6;
   padding: 7px;
   padding-left: 10px;
   padding-right: 10px;
   display: none;
   position: absolute;
-  background: #fff
+  background: rgb(1, 116, 223);
+}
+
+.selected-el-tool li a{
+  color:  #fff
+}
+
+.selected-el-tool li a:hover{
+  color: rgb(0, 88, 170);
 }
 
 .sq-link{
@@ -19,7 +26,7 @@
   height: 60px;
   text-align: center;
   vertical-align: middle;
-  color: #8a8a8a;
+  color: #8a8a8a!important;
   text-decoration: none;
   display: inline-block;
   padding: 10px;
@@ -31,21 +38,24 @@
 }
 
 .selected-parent-tool{
-  border: 0.5px solid #e6e6e6;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  background: rgb(1, 116, 223);
+  padding-top: 10px;
+  padding-bottom: 10px;
   position: absolute;
-  background: white;
   display: none;
 }
 .selected-parent-tool a{
   display: block;
   padding: 10;
-  
+  color: #FFF;
+}
+
+.selected-parent-tool a:hover{
+  color: rgb(0, 88, 170);
 }
 
 .highlight-active{
-  outline: solid 1px rgb(59, 181, 238);
+  outline: solid 1px rgb(0, 132, 255);
   outline-offset: 10px
 }
 

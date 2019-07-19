@@ -67,7 +67,7 @@ Builder.prototype = {
 
       tool.show();
       tool.animate({
-        top: self.el.offset().top - 50,
+        top: self.el.offset().top - 45,
         left: self.el.offset().left 
       });
     },
@@ -127,14 +127,21 @@ Builder.prototype = {
       var self = this
       $('.selected-el-tool-btn').click(function(e){
         e.preventDefault()
-        var cmd = $(this).attr('command-data');
+        var cmd = $(this).attr('css-attr-value');
+        var cssattr = $(this).attr('css-attr');
         if(cmd == 'trash'){
           $(self.el).remove();
           $(".sq-dropdown").hide();   
           $(".selected-el-tool").hide();
           $(self.el).removeClass('highlight-active') 
         } else {
-          document.execCommand('bold')
+
+          if(window.getSelection().toString()!= ""){
+            document.execCommand(cmd)
+          } else {
+            $(self.el).css(cssattr, cmd)
+            console.log(cssattr)
+          }
         }
       });
     },
