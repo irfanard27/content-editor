@@ -1,5 +1,5 @@
 .builder-container{
-  width: 900px;
+  width: 600px;
   margin-right:auto;
   margin-left: auto; 
 }
@@ -10,16 +10,9 @@
   padding-right: 10px;
   display: none;
   position: absolute;
-  background: rgb(1, 116, 223);
+  background: rgb(241, 241, 241);
 }
 
-.selected-el-tool li a{
-  color:  #fff
-}
-
-.selected-el-tool li a:hover{
-  color: rgb(0, 88, 170);
-}
 
 .sq-link{
   width: 60px;
@@ -55,8 +48,8 @@
 }
 
 .highlight-active{
-  outline: solid 1px rgb(0, 132, 255);
-  outline-offset: 10px
+  outline: dashed 1px rgba(0, 132, 255, 0.61);
+  outline-offset: 0px
 }
 
 .row-section *:hover {
@@ -106,4 +99,11 @@ section{
   padding-top:3px;
   margin-right:5px;
   margin-left:5px;
+}
+
+.css-attr-btn-active{
+  color:rgb(100, 100, 100);
+}
+.css-attr-btn{
+  color: rgb(240, 240, 240);
 }

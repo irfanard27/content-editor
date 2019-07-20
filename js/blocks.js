@@ -51,5 +51,22 @@ var blocks = [
       </div>
     </section>
     `
+  },
+  {
+    name: 'heading-2-column',
+    img:'article.png',
+    html: `
+    <section class='row-section'>
+      <div class="uk-grid-divider uk-child-width-expand@s" uk-grid>
+          <div>
+            <h3>This Is Heading</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></div>
+          <div>
+            <h3>This Is Heading</h3>
+            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p></div>
+          
+        </div>
+    </section>
+    `
   }
 ]
