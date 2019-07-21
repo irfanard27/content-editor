@@ -1,5 +1,5 @@
 .builder-container{
-  width: 600px;
+  width: 700px;
   margin-right:auto;
   margin-left: auto; 
 }
@@ -68,8 +68,6 @@
 }
 
 section{
-  margin-top:50;
-  margin-bottom:50;
   text-align: justify
 }
 .padding{
@@ -106,4 +104,14 @@ section{
 }
 .css-attr-btn{
   color: rgb(240, 240, 240);
+}
+
+.image-tool-resizer-top, .image-tool-resizer-bottom{
+  width: 10px;
+  height: 10px;
+  background: #ffffff;
+  border: solid 2px rgb(1, 116, 223);
+  border-radius:10px; 
+  position: absolute;
+  cursor: all-scroll;
 }

@@ -43,8 +43,9 @@ Builder.prototype = {
       var self = this
       this.container.on('click', function(e){
         if(self.prevEl != null) { 
-          self.prevEl.removeClass('highlight-active');
-          self.prevEl.attr('contenteditable','false');
+          //self.prevEl.removeClass('highlight-active');
+          //self.prevEl.attr('contenteditable','false');
+          self._removePrevElHighlight();
         }
         
         self.el = $(e.target)
@@ -60,6 +61,17 @@ Builder.prototype = {
            self._showParentTool(mainParent)
         }
       });
+    },
+
+    _removePrevElHighlight: function(){
+      this.prevEl.removeClass('highlight-active');
+      this.prevEl.attr('contenteditable','false');
+
+      if(this.el.prop('tagName')=='IMG'){
+        $('.image-tool-resizer-top').remove();
+        $('.image-tool-resizer-bottom').remove();
+      }
+      
     },
 
     _showElTool: function(){
@@ -80,7 +92,7 @@ Builder.prototype = {
       tool.show();
       tool.animate({
         top: $(parent).offset().top,
-        left: $(parent).offset().left + $(parent).width() + 20
+        left: $('.builder-container').offset().left + $('.builder-container').width()+ 10
       });
     },
     
@@ -162,6 +174,7 @@ Builder.prototype = {
       } else {
         if(!$(el).hasClass('row-section') && !$(el).hasClass('builder-container')){
           this._highlightActive(el);
+          this._isImageElement();
         } else {
           this._highlightNonActive(el)
         }
@@ -176,11 +189,13 @@ Builder.prototype = {
         if(cmd != undefined && window.getSelection().toString()!= ""){
           document.execCommand(cmd)
         } else {
-          if( $(this).attr('css-attr-active') == 'true'){
+          if($(this).attr('css-attr-active') == 'true'){
             $(self.el).css(cssAttr[0], '');
             $(this).removeAttr('css-attr-active')
-            console.log("haha")
           } else {
+            if ($(this).attr('css-attr-group') != undefined){
+              $("[css-attr-group='"+ $(this).attr('css-attr-group') +"']").removeAttr('css-attr-active');
+            }
             $(this).attr('css-attr-active','true');
             $(self.el).css(cssAttr[0], cssAttr[1]);
           }
@@ -203,11 +218,12 @@ Builder.prototype = {
       $(el).addClass('highlight-active');
       this.prevEl = $(el)
       $(el).attr('contenteditable','true');
+      $(el).focus();
     },
 
     _highlightNonActive: function(el){
       this.prevEl = null
-      $(el).attr('contenteditable','false');
+      //$(el).attr('contenteditable','false');
       $(el).removeClass('highlight-active');
       $('.selected-parent-tool').hide();
       $('.selected-el-tool').hide();
@@ -222,8 +238,47 @@ Builder.prototype = {
           $("[css-attr='"+val.trim()+"']").attr('css-attr-active', 'true');
         });
       }
-      
+    },
 
-    }
+    _isImageElement: function(){
+      console.log(this.el.position());
+      console.log(this.el.offset());
+      var self = this;
+      if(self.el.prop('tagName')=='IMG'){
+        var toolTop="<span class='image-tool-resizer-top' />";
+        var toolBottm="<div class='image-tool-resizer-bottom' draggable='true'/>";
+
+        var topTop = $(self.el).offset().top - 5;
+        var topLeft = $(self.el).offset().left - 5;
+
+        var bottmTop = ($(self.el).offset().top - 5) + (self.el.height());
+        var bottmLeft = ($(self.el).offset().left - 5) + (self.el.width());
+        $('body').append(toolTop); 
+        $('body').append(toolBottm);
+        $('.image-tool-resizer-top').css('top', topTop);
+        $('.image-tool-resizer-top').css('left', topLeft);  
+
+        $('.image-tool-resizer-bottom').css('top', bottmTop);
+        $('.image-tool-resizer-bottom').css('left', bottmLeft); 
+
+        $('.image-tool-resizer-bottom').draggable({
+          helper:'clone',
+          drag: function(ev){
+            var nbottmTop = ($(self.el).offset().top - 5) + (self.el.height());
+            var nbottmLeft = ($(self.el).offset().left - 5) + (self.el.width());
+            $('.image-tool-resizer-bottom').css('top', nbottmTop);
+            $('.image-tool-resizer-bottom').css('left', nbottmLeft);
+            var x = ev.pageX - self.el.offset().left;
+            self.el.css("width", x);         
+          },
+          stop: function(){
+            var nbottmTop = ($(self.el).offset().top - 5) + (self.el.height());
+            var nbottmLeft = ($(self.el).offset().left - 5) + (self.el.width());
+            $('.image-tool-resizer-bottom').css('top', nbottmTop);
+            $('.image-tool-resizer-bottom').css('left', nbottmLeft); 
+          }
+        });
+      }
+    },
     
 }
