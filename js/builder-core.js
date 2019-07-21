@@ -17,6 +17,8 @@ Builder = function (){
   this.isDragging = false;
   this.components = components;  // this from components file
   this.blocks = blocks;
+  this.textColorPicker = textColPicker;
+  this.bgColorPicker = bgColPicker;
 }
 
 Builder.prototype = {
@@ -37,6 +39,8 @@ Builder.prototype = {
       this._toolsButtonClick();
       this._toolButtonPanelClick();
       this._setCssAttr();
+      this._onColorPickerSave();
+      this._onBgColorPickerSave();
     }, 
 
     _initHighlight: function(){
@@ -49,12 +53,19 @@ Builder.prototype = {
         }
         
         self.el = $(e.target)
+        self.parent = $(self.el.parent('section')[0])
         //self.el.addClass('highlight-active'); 
         self._highlightToParagraphOrDiv(e.target);
         
         //self.prevEl = self.el;
         self._showElTool();
-        self._findCssAttr();     
+        self._findCssAttr();
+        
+        var textColor = self.el.css('color');
+        self.textColorPicker.setColor(textColor.toString())
+
+        var bgColor = self.parent.css('background-color');
+        self.bgColorPicker.setColor(bgColor.toString())
 
         var mainParent = $(e.target).parents().closest('.row-section')[0];
         if(mainParent!=null){
@@ -67,10 +78,7 @@ Builder.prototype = {
       this.prevEl.removeClass('highlight-active');
       this.prevEl.attr('contenteditable','false');
 
-      if(this.el.prop('tagName')=='IMG'){
-        $('.image-tool-resizer-top').remove();
-        $('.image-tool-resizer-bottom').remove();
-      }
+      this._removeImgResizer();
       
     },
 
@@ -212,6 +220,7 @@ Builder.prototype = {
       $(".sq-dropdown").hide();   
       $(".selected-el-tool").fadeOut();
       $(el).removeClass('highlight-active'); 
+      this._removeImgResizer();
     },
 
     _highlightActive :function(el){
@@ -241,8 +250,6 @@ Builder.prototype = {
     },
 
     _isImageElement: function(){
-      console.log(this.el.position());
-      console.log(this.el.offset());
       var self = this;
       if(self.el.prop('tagName')=='IMG'){
         var toolTop="<span class='image-tool-resizer-top' />";
@@ -280,5 +287,32 @@ Builder.prototype = {
         });
       }
     },
+
+    _findCssForPropertiesPane: function(){
+      var csslist = $(this.el).attr('style')
+    },
+
+    _removeImgResizer: function(){
+      if(this.el.prop('tagName')=='IMG'){
+        $('.image-tool-resizer-top').remove();
+        $('.image-tool-resizer-bottom').remove();
+      }
+    },
+
+    _onColorPickerSave: function(){
+      this.textColorPicker.on('save', (color) => {
+        const col =  color.toHEXA().toString();
+        this.el.css('color', col)
+      });
+    },
+    
+    _onBgColorPickerSave: function(){
+      var self = this;
+      this.bgColorPicker.on('save', (color) => {
+        const col =  color.toHEXA().toString();
+        $(self.parent).css('background-color', col);
+      });
+    } 
+    
     
 }
