@@ -31,12 +31,10 @@ const textColPicker = Pickr.create({
       }
   }
 });
-
-const bgColPicker = Pickr.create({
-  el: '.bg-color-picker',
+const elBgColPicker = Pickr.create({
+  el: '.el-bg-color-picker',
   theme: 'monolith', // or 'monolith', or 'nano'
   swatches: swatches,
-  default:'#ffffff',
   components: {
       preview: true,
       opacity: true,
@@ -48,4 +46,22 @@ const bgColPicker = Pickr.create({
           save: true
       }
   }
+});
+
+const bgColPicker = Pickr.create({
+  el: '.bg-color-picker',
+  theme: 'monolith', // or 'monolith', or 'nano'
+  swatches: swatches,
+  components: {
+      preview: true,
+      opacity: true,
+      hue: true,
+      interaction: {
+          hex:true,
+          input: true,
+          clear: true,
+          save: true
+      }
+  },
+
 });

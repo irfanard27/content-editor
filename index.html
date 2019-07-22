@@ -6,7 +6,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <title>Page Builder</title>
-  <link rel="stylesheet" href="css/uikit.min.css" />
+  <link rel="stylesheet" href="css/uikit.css" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"> 
   <link rel="stylesheet" href="css/pickr/classic.min.css"/> <!-- 'classic' theme -->
   <link rel="stylesheet" href="css/pickr/monolith.min.css"/> <!-- 'monolith' theme -->
@@ -15,15 +15,15 @@
   <link rel="stylesheet" href="css/builder.css">
 </head>
 <body>
-  
-  <div class="uk-position-top-left uk-overlay uk-overlay-default uk-background-muted v100">
+  <div class="sidebar v100 fixed bg-blue">
     <h4 style="margin-bottom: 0">Block</h4>
     <small style="color:#9b9b9b ">Drag element to your place</small>
     <ul class="uk-list" id='block-list'>
       
     </ul>
   </div>
-  <div class="builder-container"></div>
+  <br />
+  <div class="builder-container"></div><br />
   <span class="selected-el-tool">
       <ul class="uk-iconnav">
           <li class="selected-el-tool-btn">
@@ -53,19 +53,96 @@
           <li class="css-attr-btn" css-attr="text-align: right" css-attr-group="text-align"><a href="#"><i class="fa fa-align-right"></i></a></li>
           <li class="css-attr-btn" css-attr="text-align: justify" css-attr-group="text-align"><a href="#"><i class="fa fa-align-justify"></i></a></li>
           <li class="text-color-picker" title="Text Color"></li>
+          <li class="selected-el-tool-btn"><a href="#" uk-icon="icon: settings"></a></li>
           <li class="selected-el-tool-btn" cmd="trash"><a href="#" uk-icon="icon: trash"></a></li>
-          
       </ul>
   </span>
 
   <span class="selected-parent-tool">
-      <a class="uk-icon-link uk-margin-small-left" uk-icon="arrow-up"></a>
-      <a class="uk-icon-link uk-margin-small-left" uk-icon="arrow-down"></a>
-      <a class="uk-icon-link uk-margin-small-left" uk-icon="paint-bucket"></a>
+      <a class="uk-icon-link uk-margin-small-left" uk-icon="arrow-up" cmd="move-to-prev"></a>
+      <a class="uk-icon-link uk-margin-small-left" uk-icon="arrow-down" cmd="move-to-next"></a>
       <div style="margin: 18px"><a class="bg-color-picker" title="hallo"></a></div>
       <a class="uk-icon-link uk-margin-small-left" uk-icon="settings"></a>
-      <a class="uk-icon-link uk-margin-small-left uk-margin-small-right" uk-icon="trash"></a>
+      <a class="uk-icon-link uk-margin-small-left uk-margin-small-right" uk-icon="trash" cmd="trash"></a>
   </span>
+
+  <div class="settings-panel">
+    <div class="props-div">
+        <span>Text</span><br /><br />
+        <div class="uk-grid-small uk-child-width-1-1@s" uk-grid>
+            <div>
+              <small>Font Family</small>
+              <select class="uk-input uk-form-small" type="number" placeholder="Top">
+                  <option>Option 01</option>
+                  <option>Option 02</option>
+              </select>
+            </div>
+        </div>
+        <div class="uk-grid-small uk-child-width-1-2@s" uk-grid>
+            <div>
+              <small>Font Size</small>
+            </div>
+            <div>
+              <input class="uk-input uk-form-small" type="number" placeholder="Font Size">
+            </div>
+        </div>
+    </div>
+
+    <div class="props-div">
+      <span>Backround</span><br /><br />
+      <div class="uk-grid-small uk-child-width-1-2@s" uk-grid>
+        <div>
+          <small>Background Color</small>
+        </div>
+        <div>
+          <a class="el-bg-color-picker"></a>
+        </div>
+      </div>
+    </div>
+    <div class="props-div">
+      <span>Padding</span><br /><br />
+      <div class="uk-grid-small uk-child-width-1-2@s" uk-grid>
+        <div>
+          <small>Top</small>
+          <input class="css-attr-input uk-input uk-form-small" type="number" placeholder="Top">
+        </div>
+        <div>
+          <small>Bottom</small>
+          <input class="css-attr-input uk-input uk-form-small" type="number" placeholder="Bottom">
+        </div>
+        <div>
+          <small>Left</small>
+          <input class="css-attr-input uk-input uk-form-small" type="number" placeholder="Left">
+        </div>
+        <div>
+          <small>Right</small>
+          <input class="css-attr-input uk-input uk-form-small" type="number" placeholder="Right">
+        </div>
+      </div>
+    </div>
+
+    <div class="props-div">
+        <span>Margin</span><br /><br />
+        <div class="uk-grid-small uk-child-width-1-2@s" uk-grid>
+          <div>
+            <small>Top</small>
+            <input class="css-attr-input uk-input uk-form-small" type="number" placeholder="Top">
+          </div>
+          <div>
+            <small>Bottom</small>
+            <input class="css-attr-input uk-input uk-form-small" type="number" placeholder="Bottom">
+          </div>
+          <div>
+            <small>Left</small>
+            <input class="css-attr-input uk-input uk-form-small" type="number" placeholder="Left">
+          </div>
+          <div>
+            <small>Right</small>
+            <input class="css-attr-input uk-input uk-form-small" type="number" placeholder="Right">
+          </div>
+        </div>
+      </div>
+  </div>
 </body>
  
 <script src="js/jquery.js"></script>

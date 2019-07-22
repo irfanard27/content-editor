@@ -1,7 +1,13 @@
+html,body{
+  background: #f0f0f0;
+
+}
 .builder-container{
   width: 700px;
   margin-right:auto;
   margin-left: auto; 
+  background: #FFF;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1)
 }
 
 .selected-el-tool{
@@ -10,7 +16,9 @@
   padding-right: 10px;
   display: none;
   position: absolute;
-  background: rgb(241, 241, 241);
+  background:rgb(255, 255, 255);
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 3px; 
 }
 
 
@@ -31,7 +39,9 @@
 }
 
 .selected-parent-tool{
-  background: rgb(1, 116, 223);
+  background: #333333;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 3px; 
   padding-top: 10px;
   padding-bottom: 10px;
   position: absolute;
@@ -40,11 +50,11 @@
 .selected-parent-tool a{
   display: block;
   padding: 10;
-  color: #FFF;
+  color: rgb(153, 153, 153);
 }
 
 .selected-parent-tool a:hover{
-  color: rgb(0, 88, 170);
+  color: rgb(238, 238, 238);
 }
 
 .highlight-active{
@@ -62,7 +72,7 @@
 }
 .append-box{
   background: #f1f1f1;
-  height: 50px;
+  height: 30px;
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -85,9 +95,10 @@ section{
 
 .block-img{
   padding: 10px;
-  border: 0.5px solid #e6e6e6;
   background: #FFF;
   margin-bottom: 5px;
+  border-radius: 3px;
+  box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.07);
 }
 .v100{
   height: 100%;
@@ -114,4 +125,39 @@ section{
   border-radius:10px; 
   position: absolute;
   cursor: all-scroll;
+}
+
+.text-color-picker{
+  border: #505050 solid 1px;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.sidebar {
+  color: #ffffff;
+  background: rgb(247, 247, 247);
+  padding: 20px;
+}
+
+.settings-panel{
+  background-color: #fff;
+  width: 250px;
+  height: 90%;
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.07);
+  border-radius: 3px;
+  overflow-y: scroll;
+  
+
+}
+
+.settings-panel .props-div{
+  padding: 20px;
+  border-bottom: solid;
+  border-bottom-color: #f0f0f0;
+  border-bottom-width: 1px;  
 }

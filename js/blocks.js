@@ -13,7 +13,7 @@ var blocks = [
     name: 'paragraph',
     img:'paragraph.png',
     html: `
-    <section class='row-section'>
+    <section class='row-section uk-padding'>
       <p>
       Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of impuls. 
       </p>
@@ -24,7 +24,7 @@ var blocks = [
     name: 'grid-3',
     img:'3-column.png',
     html: `
-    <section class='row-section'>
+    <section class='row-section uk-padding'>
       <div class="uk-grid-divider uk-child-width-expand@s" uk-grid>
           <div><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p></div>
           <div><p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p></div>
@@ -37,7 +37,7 @@ var blocks = [
     name: 'heading-3-column',
     img:'article.png',
     html: `
-    <section class='row-section'>
+    <section class='row-section uk-padding'>
       <div class="uk-grid-divider uk-child-width-expand@s" uk-grid>
           <div>
             <h3>This Is Heading</h3>
@@ -56,7 +56,7 @@ var blocks = [
     name: 'heading-2-column',
     img:'article.png',
     html: `
-    <section class='row-section'>
+    <section class='row-section uk-padding'>
       <div class="uk-grid-divider uk-child-width-expand@s" uk-grid>
           <div>
             <h3>This Is Heading</h3>

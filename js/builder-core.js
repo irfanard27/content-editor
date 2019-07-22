@@ -41,6 +41,8 @@ Builder.prototype = {
       this._setCssAttr();
       this._onColorPickerSave();
       this._onBgColorPickerSave();
+      this._onParentToolBtnClick();
+      this.onPropPanelInputChange();
     }, 
 
     _initHighlight: function(){
@@ -53,8 +55,9 @@ Builder.prototype = {
         }
         
         self.el = $(e.target)
-        self.parent = $(self.el.parent('section')[0])
+        self.parent = $($(e.target).parents().closest('section')[0])
         //self.el.addClass('highlight-active'); 
+       
         self._highlightToParagraphOrDiv(e.target);
         
         //self.prevEl = self.el;
@@ -62,12 +65,14 @@ Builder.prototype = {
         self._findCssAttr();
         
         var textColor = self.el.css('color');
-        self.textColorPicker.setColor(textColor.toString())
+        if(textColor!=undefined)
+          self.textColorPicker.setColor(textColor.toString())
 
-        var bgColor = self.parent.css('background-color');
-        self.bgColorPicker.setColor(bgColor.toString())
+        var bgColor = self.parent.css('background-color') == 'rgba(0, 0, 0, 0)' ? "rgb(255, 255, 255)" : self.parent.css('background-color');
+        self.bgColorPicker.setColor(bgColor)
 
-        var mainParent = $(e.target).parents().closest('.row-section')[0];
+
+        var mainParent = $(e.target).parents().closest('section')[0];
         if(mainParent!=null){
            self._showParentTool(mainParent)
         }
@@ -85,11 +90,20 @@ Builder.prototype = {
     _showElTool: function(){
       var self = this;
       var tool = $('.selected-el-tool');
-
+      
       tool.show();
+      this._moveElTool(this.el)
+    },
+
+    _moveElTool: function(el){
+      var tool = $('.selected-el-tool');
+      var maxRight = $('.builder-container').offset().left + $('.builder-container').width();
+      var tool_width = tool.width();
+      var tool_left =  el.offset().left;
+
       tool.animate({
-        top: self.el.offset().top - 45,
-        left: self.el.offset().left 
+        top: el.offset().top - 45,
+        left: tool_left - (maxRight - tool_left > tool_width ? 0 : (tool_width / 3) + 10)
       });
     },
 
@@ -98,8 +112,21 @@ Builder.prototype = {
       var tool = $('.selected-parent-tool');
 
       tool.show();
+      this._moveParentTool(parent);
+    },
+
+    _moveParentTool: function(parent){
+      var tool = $('.selected-parent-tool');
       tool.animate({
         top: $(parent).offset().top,
+        left: $('.builder-container').offset().left + $('.builder-container').width()+ 10
+      });
+    },
+
+    _moveParentToolToPoint: function(point){
+      var tool = $('.selected-parent-tool');
+      tool.animate({
+        top: point,
         left: $('.builder-container').offset().left + $('.builder-container').width()+ 10
       });
     },
@@ -118,10 +145,10 @@ Builder.prototype = {
         },
         drag: function(e){
             $('.builder-container *').on('mouseenter', function(e){
-              mainParent = $(e.target).parents().closest('.row-section')[0];
+              mainParent = $(e.target).parents().closest('section')[0];
               if(mainParent!=null){
                 $('.append-box').remove();
-                $("<div class='append-box'></div>").appendTo(mainParent)
+                $(mainParent).after("<div class='append-box'></div>");
               }
            });
 
@@ -312,7 +339,52 @@ Builder.prototype = {
         const col =  color.toHEXA().toString();
         $(self.parent).css('background-color', col);
       });
-    } 
+    },
     
+    _onParentToolBtnClick: function(){
+      var self = this;
+      $(".selected-parent-tool a").click(function(e){
+        e.preventDefault();
+        var cmd = $(this).attr("cmd");
+        switch(cmd){
+          case 'move-to-prev' :
+            self._moveToPrev(self.parent)
+            break;
+          case 'move-to-next' :
+            self._moveToNext(self.parent)
+          case 'trash' :
+            self._removeElement(self.parent)
+            break;
+        }
+      })
+    },
+
+    _moveToPrev(el){
+      var html = $(el).get(0).outerHTML;
+      var prevEl = $(el).prev();
+      $(prevEl).before(html.replace("highlight-active","").replace('contenteditable="true"',""));
     
+      $(".selected-el-tool").fadeOut();
+      $(".selected-parent-tool").fadeOut();
+      $(el).removeClass('highlight-active');   
+      $(el).remove();
+      this.parent = null;
+    },
+
+    _moveToNext(el){
+      var html = $(el).get(0).outerHTML;
+      var nextEl = $(el).next();
+      nextEl.after(html.replace("highlight-active","").replace('contenteditable="true"',""));
+
+      $(el).remove();
+      $(".selected-el-tool").fadeOut();
+      $(".selected-parent-tool").fadeOut();
+      this.parent = null;
+    },
+    
+    onPropPanelInputChange: function(){
+      $('.css-attr-input').change(function(e){
+        console.log(e);
+      })
+    }
 }
